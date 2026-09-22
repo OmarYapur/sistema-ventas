@@ -1,0 +1,14 @@
+gt\guatemarket\sistema\ventas\modelo\UsuarioVendedor.class
+gt\guatemarket\sistema\ventas\modelo\Cliente.class
+gt\guatemarket\sistema\ventas\modelo\Factura.class
+gt\guatemarket\sistema\ventas\modelo\Venta.class
+gt\guatemarket\sistema\ventas\vista\FrmProductos$1.class
+gt\guatemarket\sistema\ventas\modelo\Producto.class
+gt\guatemarket\sistema\ventas\vista\FrmVentas.class
+gt\guatemarket\sistema\ventas\modelo\DetalleFactura.class
+gt\guatemarket\sistema\ventas\vista\FrmProductos.class
+gt\guatemarket\sistema\ventas\config\ConexionBD.class
+gt\guatemarket\sistema\ventas\modelo\Persona.class
+gt\guatemarket\sistema\ventas\modelo\Inventario.class
+gt\guatemarket\sistema\ventas\vista\FrmPrincipal.class
+gt\guatemarket\sistema\ventas\modelo\Vendedor.class
