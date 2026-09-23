@@ -1,23 +1,22 @@
 package gt.guatemarket.sistema.ventas.modelo;
 
 public class Producto {
+
     private String idProducto;
     private String nombreProducto;
     private String categoriaProducto;
     private double precio;
     private int stock;
 
-    public Producto(String idProducto, String nombreProducto, String categoriaProducto,
-                     double precio, int stock) {
-        this.idProducto = idProducto;
-        this.nombreProducto = nombreProducto;
-        this.categoriaProducto = categoriaProducto;
-        this.precio = precio;
-        this.stock = stock;
+    public Producto() {
     }
 
     public String getIdProducto() {
         return idProducto;
+    }
+    
+    public void setIdProducto(String idProducto) {
+        this.idProducto = idProducto;
     }
 
     public String getNombreProducto() {
@@ -40,12 +39,16 @@ public class Producto {
         return precio;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setPrecio(double Precio) {
+        this.precio = Precio;
     }
 
     public int getStock() {
         return stock;
+    }
+    
+    public void setStock(int Stock) {
+        this.stock = Stock;
     }
 
     public void registrarProducto() {
