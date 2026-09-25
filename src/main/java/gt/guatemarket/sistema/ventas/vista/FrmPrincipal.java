@@ -37,10 +37,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
@@ -91,9 +91,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem4.addActionListener(this::jMenuItem4ActionPerformed);
         jMenu4.add(jMenuItem4);
 
-        jMenuItem5.setText("Categorias");
-        jMenu4.add(jMenuItem5);
-
         jMenuItem7.setText("Proveedores");
         jMenuItem7.addActionListener(this::jMenuItem7ActionPerformed);
         jMenu4.add(jMenuItem7);
@@ -102,9 +99,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu5.setText("Inventario");
 
-        jMenuItem8.setText("Stocks");
+        jMenuItem8.setText("Productos");
         jMenuItem8.addActionListener(this::jMenuItem8ActionPerformed);
         jMenu5.add(jMenuItem8);
+
+        jMenuItem16.setText("Categorias");
+        jMenuItem16.addActionListener(this::jMenuItem16ActionPerformed);
+        jMenu5.add(jMenuItem16);
 
         jMenuItem9.setText("Movimientos");
         jMenu5.add(jMenuItem9);
@@ -182,7 +183,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        // TODO add your handling code here:
+        FrmProductos ventana = new FrmProductos();
+        jDesktopPane1.add(ventana);
+        ventana.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
@@ -190,10 +193,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        FrmProductos ventana = new FrmProductos();
+
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        FrmCategorias ventana = new FrmCategorias();
         jDesktopPane1.add(ventana);
         ventana.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,10 +244,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;

@@ -1,7 +1,11 @@
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\config\ConexionBD.java
+C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\controlador\CategoriaController.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\controlador\ProductoController.java
+C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\CategoriaDAO.java
+C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\CategoriaDAOImpl.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\ProductoDAO.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\ProductoDAOImpl.java
+C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\Categoria.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\Cliente.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\DetalleFactura.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\Factura.java
@@ -11,6 +15,7 @@ C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\UsuarioVendedor.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\Vendedor.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\Venta.java
+C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\FrmCategorias.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\FrmPrincipal.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\FrmProductos.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\FrmVentas.java

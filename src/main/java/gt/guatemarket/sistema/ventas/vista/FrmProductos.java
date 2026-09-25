@@ -8,6 +8,9 @@ import gt.guatemarket.sistema.ventas.controlador.ProductoController;
 import gt.guatemarket.sistema.ventas.modelo.Producto;
 import gt.guatemarket.sistema.ventas.dao.ProductoDAO;
 import gt.guatemarket.sistema.ventas.dao.ProductoDAOImpl;
+import gt.guatemarket.sistema.ventas.modelo.Categoria;
+import gt.guatemarket.sistema.ventas.dao.CategoriaDAO;
+import gt.guatemarket.sistema.ventas.dao.CategoriaDAOImpl;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
@@ -27,6 +30,7 @@ public class FrmProductos extends javax.swing.JInternalFrame {
         initComponents();
         modelo = (DefaultTableModel) tablaProductos.getModel();
         cargarProductos();
+        cargarCategorias();
     }
 
     /**
@@ -53,6 +57,11 @@ public class FrmProductos extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         idProducto = new javax.swing.JTextField();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Productos");
@@ -119,7 +128,7 @@ public class FrmProductos extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(precioProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(idProducto)))
@@ -129,13 +138,13 @@ public class FrmProductos extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nombreProducto)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(stocksProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(categoriaProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                                        .addComponent(categoriaProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(nombreProducto))))))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -170,21 +179,13 @@ public class FrmProductos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cargarProductos() {
-
         modelo.setRowCount(0);
 
         ProductoDAO dao = new ProductoDAOImpl();
 
         List<Producto> productos = dao.listar();
 
-        System.out.println("PRODUCTOS ENCONTRADOS: " + productos.size());
-
         for (Producto producto : productos) {
-
-            System.out.println(
-                    producto.getIdProducto() + " - "
-                    + producto.getNombreProducto()
-            );
 
             modelo.addRow(new Object[]{
                 producto.getIdProducto(),
@@ -193,6 +194,19 @@ public class FrmProductos extends javax.swing.JInternalFrame {
                 producto.getPrecio(),
                 producto.getStock()
             });
+        }
+    }
+
+    private void cargarCategorias() {
+
+        categoriaProducto.removeAllItems();
+
+        CategoriaDAO dao = new CategoriaDAOImpl();
+
+        List<Categoria> categorias = dao.listar();
+
+        for (Categoria categoria : categorias) {
+            categoriaProducto.addItem(categoria.getNombreCategoria());
         }
     }
 
