@@ -11,6 +11,9 @@ import gt.guatemarket.sistema.ventas.dao.ProductoDAOImpl;
 import gt.guatemarket.sistema.ventas.modelo.Categoria;
 import gt.guatemarket.sistema.ventas.dao.CategoriaDAO;
 import gt.guatemarket.sistema.ventas.dao.CategoriaDAOImpl;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
@@ -22,6 +25,7 @@ import java.util.List;
 public class FrmProductos extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modelo;
+    private TableRowSorter<DefaultTableModel> sorter;
 
     /**
      * Creates new form FrmProductos
@@ -31,6 +35,10 @@ public class FrmProductos extends javax.swing.JInternalFrame {
         modelo = (DefaultTableModel) tablaProductos.getModel();
         cargarProductos();
         cargarCategorias();
+        sorter = new TableRowSorter<>(
+                (DefaultTableModel) tablaProductos.getModel());
+
+        tablaProductos.setRowSorter(sorter);
     }
 
     /**
@@ -57,6 +65,10 @@ public class FrmProductos extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         idProducto = new javax.swing.JTextField();
+        agregarStocks = new javax.swing.JButton();
+        eliminarProducto = new javax.swing.JButton();
+        productoBusqueda = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -83,6 +95,11 @@ public class FrmProductos extends javax.swing.JInternalFrame {
             }
         });
         tablaProductos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        tablaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaProductosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaProductos);
 
         agregarProducto.setText("Agregar Nuevo");
@@ -105,6 +122,21 @@ public class FrmProductos extends javax.swing.JInternalFrame {
 
         jLabel6.setText("ID:");
 
+        agregarStocks.setText("Agregar Stocks");
+        agregarStocks.addActionListener(this::agregarStocksActionPerformed);
+
+        eliminarProducto.setText("Eliminar Producto");
+        eliminarProducto.addActionListener(this::eliminarProductoActionPerformed);
+
+        productoBusqueda.addActionListener(this::productoBusquedaActionPerformed);
+        productoBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                productoBusquedaKeyReleased(evt);
+            }
+        });
+
+        jLabel7.setText("🔍");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,7 +152,15 @@ public class FrmProductos extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(agregarProducto)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(editarProducto))
+                                .addComponent(editarProducto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(agregarStocks)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(eliminarProducto)
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(productoBusqueda))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 779, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -169,7 +209,11 @@ public class FrmProductos extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(agregarProducto)
-                    .addComponent(editarProducto))
+                    .addComponent(editarProducto)
+                    .addComponent(agregarStocks)
+                    .addComponent(eliminarProducto)
+                    .addComponent(productoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -180,13 +224,9 @@ public class FrmProductos extends javax.swing.JInternalFrame {
 
     private void cargarProductos() {
         modelo.setRowCount(0);
-
         ProductoDAO dao = new ProductoDAOImpl();
-
         List<Producto> productos = dao.listar();
-
         for (Producto producto : productos) {
-
             modelo.addRow(new Object[]{
                 producto.getIdProducto(),
                 producto.getNombreProducto(),
@@ -198,13 +238,9 @@ public class FrmProductos extends javax.swing.JInternalFrame {
     }
 
     private void cargarCategorias() {
-
         categoriaProducto.removeAllItems();
-
         CategoriaDAO dao = new CategoriaDAOImpl();
-
         List<Categoria> categorias = dao.listar();
-
         for (Categoria categoria : categorias) {
             categoriaProducto.addItem(categoria.getNombreCategoria());
         }
@@ -230,14 +266,11 @@ public class FrmProductos extends javax.swing.JInternalFrame {
             );
             return;
         }
-
         try {
             int cantidad = Integer.parseInt(cantidadTexto);
-
             double precio = Double.parseDouble(
                     precioTexto.replace(",", ".")
             );
-
             Producto nuevoProducto = new Producto();
 
             nuevoProducto.setIdProducto(codigo);
@@ -245,24 +278,19 @@ public class FrmProductos extends javax.swing.JInternalFrame {
             nuevoProducto.setCategoriaProducto(categoria);
             nuevoProducto.setPrecio(precio);
             nuevoProducto.setStock(cantidad);
-
             ProductoDAO dao = new ProductoDAOImpl();
             dao.guardar(nuevoProducto);
-
             cargarProductos();
-
             JOptionPane.showMessageDialog(
                     this,
                     "Producto guardado correctamente."
             );
-
             idProducto.setText("");
             nombreProducto.setText("");
             stocksProducto.setText("");
             precioProducto.setText("");
             categoriaProducto.setSelectedIndex(0);
             idProducto.requestFocus();
-
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(
                     this,
@@ -274,18 +302,174 @@ public class FrmProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_agregarProductoActionPerformed
 
     private void editarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarProductoActionPerformed
-        // TODO add your handling code here:
+        if (idProducto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Seleccione un producto de la tabla.");
+            return;
+        }
+        try {
+            String id = idProducto.getText();
+            String nombre = nombreProducto.getText();
+            String categoria = categoriaProducto.getSelectedItem().toString();
+
+            double precio = Double.parseDouble(
+                    precioProducto.getText().replace(",", "."));
+            int stock = Integer.parseInt(stocksProducto.getText());
+            Producto producto = new Producto();
+            producto.setIdProducto(id);
+            producto.setNombreProducto(nombre);
+            producto.setCategoriaProducto(categoria);
+            producto.setPrecio(precio);
+            producto.setStock(stock);
+
+            ProductoDAO dao = new ProductoDAOImpl();
+            dao.actualizar(producto);
+            cargarProductos();
+            JOptionPane.showMessageDialog(this,
+                    "Producto actualizado correctamente.");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "El precio y el stock deben ser numéricos.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
     }//GEN-LAST:event_editarProductoActionPerformed
 
     private void nombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreProductoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreProductoActionPerformed
 
+    private void agregarStocksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarStocksActionPerformed
+        String id = JOptionPane.showInputDialog(this,
+                "Ingrese el ID del producto:");
+        if (id == null || id.isEmpty()) {
+            return;
+        }
+        try {
+            int idProducto = Integer.parseInt(id);
+            ProductoDAO dao = new ProductoDAOImpl();
+            Producto producto = dao.buscarPorId(idProducto);
+            if (producto == null) {
+                JOptionPane.showMessageDialog(this,
+                        "El producto no existe.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+            String cantidad = JOptionPane.showInputDialog(this,
+                    "Producto: " + producto.getNombreProducto()
+                    + "\nIngrese los stocks que desea agregar:");
+            if (cantidad == null || cantidad.isEmpty()) {
+                return;
+            }
+            int stock = Integer.parseInt(cantidad);
+            if (stock <= 0) {
+                JOptionPane.showMessageDialog(this,
+                        "La cantidad debe ser mayor a 0.",
+                        "Advertencia",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+            dao.agregarStock(id, stock);
+            cargarProductos();
+            JOptionPane.showMessageDialog(this,
+                    "Stock agregado correctamente.");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Ingrese un valor válido.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_agregarStocksActionPerformed
+
+    private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
+        int fila = tablaProductos.getSelectedRow();
+        if (fila != -1) {
+            idProducto.setText(tablaProductos.getValueAt(fila, 0).toString());
+            nombreProducto.setText(tablaProductos.getValueAt(fila, 1).toString());
+            categoriaProducto.setSelectedItem(tablaProductos.getValueAt(fila, 2).toString());
+            precioProducto.setText(tablaProductos.getValueAt(fila, 3).toString());
+            stocksProducto.setText(tablaProductos.getValueAt(fila, 4).toString());
+        }
+    }//GEN-LAST:event_tablaProductosMouseClicked
+
+    private void eliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarProductoActionPerformed
+        String id = JOptionPane.showInputDialog(this,
+                "Ingrese el ID del producto:");
+
+        if (id == null || id.isEmpty()) {
+            return;
+        }
+
+        try {
+
+            int idProducto = Integer.parseInt(id);
+
+            ProductoDAO dao = new ProductoDAOImpl();
+            Producto producto = dao.buscarPorId(idProducto);
+
+            if (producto == null) {
+                JOptionPane.showMessageDialog(this,
+                        "El producto no existe.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+
+            int confirmar = JOptionPane.showConfirmDialog(this,
+                    "Producto: " + producto.getNombreProducto()
+                    + "\n\n¿Desea eliminar este producto?",
+                    "Confirmar eliminación",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirmar == JOptionPane.YES_OPTION) {
+
+                dao.eliminar(idProducto);
+                cargarProductos();
+
+                JOptionPane.showMessageDialog(this,
+                        "Producto eliminado correctamente.");
+            }
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this,
+                    "Ingrese un ID válido.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_eliminarProductoActionPerformed
+
+    private void productoBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productoBusquedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productoBusquedaActionPerformed
+
+    private void productoBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productoBusquedaKeyReleased
+        String texto = productoBusqueda.getText();
+
+        if (texto.trim().isEmpty()) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(
+                    RowFilter.regexFilter("(?i)" + texto)
+            );
+        }
+    }//GEN-LAST:event_productoBusquedaKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarProducto;
+    private javax.swing.JButton agregarStocks;
     private javax.swing.JComboBox<String> categoriaProducto;
     private javax.swing.JButton editarProducto;
+    private javax.swing.JButton eliminarProducto;
     private javax.swing.JTextField idProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -293,9 +477,11 @@ public class FrmProductos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nombreProducto;
     private javax.swing.JTextField precioProducto;
+    private javax.swing.JTextField productoBusqueda;
     private javax.swing.JTextField stocksProducto;
     private javax.swing.JTable tablaProductos;
     // End of variables declaration//GEN-END:variables

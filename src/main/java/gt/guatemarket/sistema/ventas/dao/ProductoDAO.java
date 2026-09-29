@@ -17,6 +17,8 @@ public interface ProductoDAO {
     List<Producto> listar();
 
     Producto buscarPorId(int id);
+    
+    void agregarStock(String idProducto, int cantidad);
 
     void actualizar(Producto producto);
 

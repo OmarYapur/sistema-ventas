@@ -14,9 +14,11 @@ gt\guatemarket\sistema\ventas\config\ConexionBD.class
 gt\guatemarket\sistema\ventas\modelo\Persona.class
 gt\guatemarket\sistema\ventas\dao\CategoriaDAOImpl.class
 gt\guatemarket\sistema\ventas\modelo\Inventario.class
+gt\guatemarket\sistema\ventas\vista\FrmProductos$3.class
 gt\guatemarket\sistema\ventas\modelo\Categoria.class
 gt\guatemarket\sistema\ventas\vista\FrmPrincipal.class
 gt\guatemarket\sistema\ventas\dao\CategoriaDAO.class
 gt\guatemarket\sistema\ventas\dao\ProductoDAOImpl.class
 gt\guatemarket\sistema\ventas\controlador\ProductoController.class
 gt\guatemarket\sistema\ventas\modelo\Vendedor.class
+gt\guatemarket\sistema\ventas\vista\FrmProductos$2.class
