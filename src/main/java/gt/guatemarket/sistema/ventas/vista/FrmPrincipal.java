@@ -36,7 +36,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem17 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
@@ -50,7 +49,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         jMenu4.setText("jMenu4");
 
@@ -75,6 +73,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem1);
 
         jMenuItem2.setText("Órdenes de Venta");
+        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
         jMenu3.add(jMenuItem2);
 
         jMenuBar2.add(jMenu3);
@@ -84,9 +83,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem17.setText("Clientes");
         jMenuItem17.addActionListener(this::jMenuItem17ActionPerformed);
         jMenu8.add(jMenuItem17);
-
-        jMenuItem5.setText("Proveedores");
-        jMenu8.add(jMenuItem5);
 
         jMenuItem3.setText("Empleados");
         jMenu8.add(jMenuItem3);
@@ -136,9 +132,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu5.add(jMenuItem9);
 
         jMenuBar2.add(jMenu5);
-
-        jMenu2.setText("Sistema");
-        jMenuBar2.add(jMenu2);
 
         setJMenuBar(jMenuBar2);
 
@@ -198,6 +191,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ventana.setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        HistorialVentas ventana = new HistorialVentas();
+        jDesktopPane1.add(ventana);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -226,7 +225,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -244,7 +242,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables

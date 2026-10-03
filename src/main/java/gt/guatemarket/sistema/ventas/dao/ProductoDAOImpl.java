@@ -204,4 +204,18 @@ public class ProductoDAOImpl implements ProductoDAO {
                     "Error al eliminar producto: " + e.getMessage());
         }
     }
+
+    @Override
+    public boolean descontarStock(String idProducto, int cantidad) {
+        String sql = "UPDATE inventario_productos " + "SET stockproducto = stockproducto - ? " + "WHERE idproducto = ? " + "AND stockproducto >= ?";
+        try (Connection cn = ConexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setInt(1, cantidad);
+            ps.setString(2, idProducto);
+            ps.setInt(3, cantidad);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar stock:\n" + e.getMessage());
+            return false;
+        }
+    }
 }

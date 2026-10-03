@@ -25,4 +25,6 @@ public interface ProductoDAO {
     void actualizar(Producto producto);
 
     void eliminar(int id);
+    
+    boolean descontarStock(String idProducto, int cantidad);
 }

@@ -4,8 +4,7 @@
  */
 package gt.guatemarket.sistema.ventas.dao;
 
-import gt.guatemarket.sistema.ventas.modelo.DetalleConsultaVenta;
-import gt.guatemarket.sistema.ventas.modelo.DetalleVenta;
+import gt.guatemarket.sistema.ventas.modelo.OrdenDespacho;
 import java.util.List;
 
 /**
@@ -13,9 +12,7 @@ import java.util.List;
  * @author omary
  */
 
-public interface DetalleVentaDAO {
+public interface OrdenDespachoDAO {
 
-    boolean guardar(DetalleVenta detalle);
-    
-    List<DetalleConsultaVenta> listarPorVenta(String idVenta);
+    List<OrdenDespacho> buscarPorVenta(String idVenta);
 }

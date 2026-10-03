@@ -4,18 +4,14 @@
  */
 package gt.guatemarket.sistema.ventas.dao;
 
-import gt.guatemarket.sistema.ventas.modelo.DetalleConsultaVenta;
-import gt.guatemarket.sistema.ventas.modelo.DetalleVenta;
+import gt.guatemarket.sistema.ventas.modelo.ConsultaVenta;
 import java.util.List;
 
 /**
  *
  * @author omary
  */
+public interface ConsultaVentaDAO {
 
-public interface DetalleVentaDAO {
-
-    boolean guardar(DetalleVenta detalle);
-    
-    List<DetalleConsultaVenta> listarPorVenta(String idVenta);
+    List<ConsultaVenta> listar();
 }

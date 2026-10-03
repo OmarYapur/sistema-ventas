@@ -4,12 +4,16 @@
  */
 package gt.guatemarket.sistema.ventas.dao;
 
+import gt.guatemarket.sistema.ventas.modelo.DetalleConsultaVenta;
 import gt.guatemarket.sistema.ventas.config.ConexionBD;
 import gt.guatemarket.sistema.ventas.modelo.DetalleVenta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.ResultSet;
 
 /**
  *
@@ -37,5 +41,26 @@ public class DetalleVentaDAOImpl implements DetalleVentaDAO {
             );
             return false;
         }
+    }
+
+    @Override
+    public List<DetalleConsultaVenta> listarPorVenta(String idVenta) {
+        List<DetalleConsultaVenta> detalles = new ArrayList<>();
+        String sql = "SELECT nombreProducto, cantidadProducto, precioUnitario, Total " + "FROM detalle_venta " + "WHERE idVenta = ?";
+        try (Connection cn = ConexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setString(1, idVenta);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                DetalleConsultaVenta detalle = new DetalleConsultaVenta();
+                detalle.setNombreProducto(rs.getString("nombreProducto"));
+                detalle.setCantidad(rs.getInt("cantidadProducto"));
+                detalle.setPrecioUnitario(rs.getDouble("precioUnitario"));
+                detalle.setTotal(rs.getDouble("Total"));
+                detalles.add(detalle);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al consultar el detalle:\n" + e.getMessage());
+        }
+        return detalles;
     }
 }
