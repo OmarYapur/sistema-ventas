@@ -249,7 +249,7 @@ public class FrmProductos extends javax.swing.JInternalFrame {
     private void agregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarProductoActionPerformed
         String codigo = idProducto.getText().trim();
         String producto = nombreProducto.getText().trim();
-        String categoria = categoriaProducto.getSelectedItem().toString();
+        String nombreCategoria = categoriaProducto.getSelectedItem().toString();
         String cantidadTexto = stocksProducto.getText().trim();
         String precioTexto = precioProducto.getText().trim();
 
@@ -266,32 +266,69 @@ public class FrmProductos extends javax.swing.JInternalFrame {
             );
             return;
         }
+
         try {
+
             int cantidad = Integer.parseInt(cantidadTexto);
+
             double precio = Double.parseDouble(
                     precioTexto.replace(",", ".")
             );
+
+            CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
+
+            List<Categoria> categorias = categoriaDAO.listar();
+
+            String idCategoria = null;
+
+            for (Categoria cat : categorias) {
+
+                if (cat.getNombreCategoria().equals(nombreCategoria)) {
+                    idCategoria = cat.getIdCategoria();
+                    break;
+                }
+            }
+
+            if (idCategoria == null) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "No se encontró la categoría.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+
             Producto nuevoProducto = new Producto();
 
             nuevoProducto.setIdProducto(codigo);
             nuevoProducto.setNombreProducto(producto);
-            nuevoProducto.setCategoriaProducto(categoria);
+            nuevoProducto.setIdCategoria(idCategoria);
             nuevoProducto.setPrecio(precio);
             nuevoProducto.setStock(cantidad);
+
             ProductoDAO dao = new ProductoDAOImpl();
+
             dao.guardar(nuevoProducto);
+
             cargarProductos();
+
             JOptionPane.showMessageDialog(
                     this,
                     "Producto guardado correctamente."
             );
+
             idProducto.setText("");
             nombreProducto.setText("");
             stocksProducto.setText("");
             precioProducto.setText("");
+
             categoriaProducto.setSelectedIndex(0);
+
             idProducto.requestFocus();
+
         } catch (NumberFormatException e) {
+
             JOptionPane.showMessageDialog(
                     this,
                     "La cantidad y el precio deben ser numéricos.",

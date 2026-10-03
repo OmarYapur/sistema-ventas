@@ -4,22 +4,23 @@
  */
 package gt.guatemarket.sistema.ventas.dao;
 
-import gt.guatemarket.sistema.ventas.modelo.Categoria;
+import gt.guatemarket.sistema.ventas.modelo.Cliente;
 import java.util.List;
 
 /**
  *
  * @author omary
  */
-public interface CategoriaDAO {
-    void guardar(Categoria categoria);
+public interface ClienteDAO {
+    void guardar(Cliente cliente);
 
-    List<Categoria> listar();
+    List<Cliente> listar();
 
-    Categoria buscarPorId(int id);
+    Cliente buscarPorId(int id);
     
+    Cliente buscarPorNombre(String nombre);
 
-    void actualizar(Categoria categoria);
+    void actualizar(Cliente cliente);
 
     void eliminar(int id);
 }

@@ -15,6 +15,8 @@ public interface ProductoDAO {
     void guardar(Producto producto);
 
     List<Producto> listar();
+    
+    List<Producto> listarPorCategoria(String idCategoria);
 
     Producto buscarPorId(int id);
     

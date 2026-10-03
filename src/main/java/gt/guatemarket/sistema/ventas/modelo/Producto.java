@@ -5,6 +5,7 @@ public class Producto {
     private String idProducto;
     private String nombreProducto;
     private String categoriaProducto;
+    private String idCategoria;
     private double precio;
     private int stock;
 
@@ -14,7 +15,7 @@ public class Producto {
     public String getIdProducto() {
         return idProducto;
     }
-    
+
     public void setIdProducto(String idProducto) {
         this.idProducto = idProducto;
     }
@@ -46,9 +47,17 @@ public class Producto {
     public int getStock() {
         return stock;
     }
-    
+
     public void setStock(int Stock) {
         this.stock = Stock;
+    }
+
+    public String getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(String idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     public void registrarProducto() {
