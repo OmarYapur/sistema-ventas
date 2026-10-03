@@ -41,7 +41,7 @@ public class FrmVentas extends javax.swing.JInternalFrame {
      */
     public FrmVentas() {
         initComponents();
-
+        setTitle("Registro Ventas");
         catalogo.getColumnModel().getColumn(3).setMinWidth(0);
         catalogo.getColumnModel().getColumn(3).setMaxWidth(0);
         catalogo.getColumnModel().getColumn(3).setPreferredWidth(0);
@@ -503,7 +503,7 @@ public class FrmVentas extends javax.swing.JInternalFrame {
         venta.setTelefono(telefonoCliente.getText().trim());
         venta.setCorreo(correoCliente.getText().trim());
         venta.setDireccion(direccionCliente.getText().trim());
-        venta.setFechaVenta(java.time.LocalDate.now().toString());
+        venta.setFechaVenta(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         VentaDAO ventaDAO = new VentaDAOImpl();
         String idVenta = ventaDAO.guardar(venta);
         if (idVenta == null) {

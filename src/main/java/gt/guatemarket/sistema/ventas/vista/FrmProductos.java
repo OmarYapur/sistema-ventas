@@ -32,6 +32,7 @@ public class FrmProductos extends javax.swing.JInternalFrame {
      */
     public FrmProductos() {
         initComponents();
+        setTitle("Inventario Producto");
         modelo = (DefaultTableModel) tablaProductos.getModel();
         cargarProductos();
         cargarCategorias();

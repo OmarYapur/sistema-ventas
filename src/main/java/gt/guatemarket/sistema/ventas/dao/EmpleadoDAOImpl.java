@@ -18,12 +18,11 @@ import javax.swing.JOptionPane;
  *
  * @author omary
  */
-
 public class EmpleadoDAOImpl implements EmpleadoDAO {
 
     @Override
     public boolean guardar(Empleado empleado) {
-        String sql = "INSERT INTO empleados " + "(codigoEmpleado, nombreEmpleado, areaEmpleado, estadoEmpleado) " + "VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO empleados " + "(codigoEmpleado, nombreEmpleado, areaLaboral, estadoEmpleado) " + "VALUES (?, ?, ?, ?)";
         try (Connection cn = ConexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, empleado.getCodigoEmpleado());
             ps.setString(2, empleado.getNombreEmpleado());
@@ -45,7 +44,7 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
                 Empleado empleado = new Empleado();
                 empleado.setCodigoEmpleado(rs.getString("codigoEmpleado"));
                 empleado.setNombreEmpleado(rs.getString("nombreEmpleado"));
-                empleado.setAreaEmpleado(rs.getString("areaEmpleado"));
+                empleado.setAreaEmpleado(rs.getString("areaLaboral"));
                 empleado.setEstadoEmpleado(rs.getString("estadoEmpleado"));
                 empleados.add(empleado);
             }
@@ -65,7 +64,7 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
                 Empleado empleado = new Empleado();
                 empleado.setCodigoEmpleado(rs.getString("codigoEmpleado"));
                 empleado.setNombreEmpleado(rs.getString("nombreEmpleado"));
-                empleado.setAreaEmpleado(rs.getString("areaEmpleado"));
+                empleado.setAreaEmpleado(rs.getString("areaLaboral"));
                 empleado.setEstadoEmpleado(rs.getString("estadoEmpleado"));
                 return empleado;
             }
@@ -77,7 +76,7 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 
     @Override
     public boolean actualizar(Empleado empleado) {
-        String sql = "UPDATE empleados SET " + "nombreEmpleado = ?, " + "areaEmpleado = ?, " + "estadoEmpleado = ? " + "WHERE codigoEmpleado = ?";
+        String sql = "UPDATE empleados SET " + "nombreEmpleado = ?, " + "areaLaboral = ?, " + "estadoEmpleado = ? " + "WHERE codigoEmpleado = ?";
         try (Connection cn = ConexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, empleado.getNombreEmpleado());
             ps.setString(2, empleado.getAreaEmpleado());

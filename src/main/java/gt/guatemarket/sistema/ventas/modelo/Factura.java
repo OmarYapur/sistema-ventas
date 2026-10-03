@@ -1,63 +1,51 @@
 package gt.guatemarket.sistema.ventas.modelo;
 
-import java.util.ArrayList;
-
 public class Factura {
-    private String idFactura;
-    private String nombreEmpresa;
-    private double subtotal;
-    private double iva;
-    private double total;
-    private ArrayList<DetalleFactura> detalles;   // composición: la Factura "contiene" sus detalles
 
-    public Factura(String idFactura, String nombreEmpresa) {
+    private String idFactura;
+    private String idVenta;
+    private String fechaFactura;
+    private double total;
+
+    public Factura() {
+    }
+
+    public Factura(String idFactura, String idVenta, String fechaFactura, double total) {
         this.idFactura = idFactura;
-        this.nombreEmpresa = nombreEmpresa;
-        this.detalles = new ArrayList<>();
-        this.subtotal = 0;
-        this.iva = 0;
-        this.total = 0;
+        this.idVenta = idVenta;
+        this.fechaFactura = fechaFactura;
+        this.total = total;
     }
 
     public String getIdFactura() {
         return idFactura;
     }
 
+    public void setIdFactura(String idFactura) {
+        this.idFactura = idFactura;
+    }
+
+    public String getIdVenta() {
+        return idVenta;
+    }
+
+    public void setIdVenta(String idVenta) {
+        this.idVenta = idVenta;
+    }
+
+    public String getFechaFactura() {
+        return fechaFactura;
+    }
+
+    public void setFechaFactura(String fechaFactura) {
+        this.fechaFactura = fechaFactura;
+    }
+
     public double getTotal() {
         return total;
     }
 
-    public ArrayList<DetalleFactura> getDetalles() {
-        return detalles;
-    }
-
-    public void agregarDetalle(DetalleFactura detalle) {
-        detalles.add(detalle);
-        calcularIva();
-    }
-
-    public void calcularIva() {
-        subtotal = 0;
-        for (DetalleFactura d : detalles) {
-            subtotal += d.getSubtotal();
-        }
-        iva = subtotal * 0.12;   // IVA de Guatemala: 12%
-        total = subtotal + iva;
-    }
-
-    public void emitirFactura() {
-        System.out.println("Factura #" + idFactura + " emitida correctamente.");
-    }
-
-    public void verFactura() {
-        System.out.println("===== " + nombreEmpresa + " =====");
-        System.out.println("Factura: " + idFactura);
-        for (DetalleFactura d : detalles) {
-            System.out.println(d.getProducto().getNombreProducto() + " x" + d.getCantidad()
-                    + " = Q" + d.getSubtotal());
-        }
-        System.out.println("Subtotal: Q" + subtotal);
-        System.out.println("IVA: Q" + iva);
-        System.out.println("Total: Q" + total);
+    public void setTotal(double total) {
+        this.total = total;
     }
 }

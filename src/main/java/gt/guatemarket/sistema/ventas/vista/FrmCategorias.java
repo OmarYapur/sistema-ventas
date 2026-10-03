@@ -25,6 +25,7 @@ public class FrmCategorias extends javax.swing.JInternalFrame {
      */
     public FrmCategorias() {
         initComponents();
+        setTitle("Categorias");
         modelo = (DefaultTableModel) tablaCategorias.getModel();
         cargarCategorias();
     }
@@ -52,6 +53,7 @@ public class FrmCategorias extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setName("Categorias"); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Categorias");

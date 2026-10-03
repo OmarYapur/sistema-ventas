@@ -4,7 +4,7 @@
  */
 package gt.guatemarket.sistema.ventas.dao;
 
-import gt.guatemarket.sistema.ventas.modelo.Empleado;
+import gt.guatemarket.sistema.ventas.modelo.Factura;
 import java.util.List;
 
 /**
@@ -12,15 +12,11 @@ import java.util.List;
  * @author omary
  */
 
-public interface EmpleadoDAO {
+public interface FacturaDAO {
 
-    boolean guardar(Empleado empleado);
+    boolean guardar(Factura factura);
 
-    List<Empleado> listar();
+    List<Factura> listar();
 
-    Empleado buscarPorCodigo(String id);
-
-    boolean actualizar(Empleado empleado);
-
-    boolean eliminar(String codigo);
+    Factura buscarPorId(String idFactura);
 }

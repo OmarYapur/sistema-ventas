@@ -10,6 +10,9 @@ import gt.guatemarket.sistema.ventas.dao.DespachosDAO;
 import gt.guatemarket.sistema.ventas.dao.DespachosDAOImpl;
 import gt.guatemarket.sistema.ventas.dao.ProductoDAO;
 import gt.guatemarket.sistema.ventas.dao.ProductoDAOImpl;
+import gt.guatemarket.sistema.ventas.dao.FacturaDAO;
+import gt.guatemarket.sistema.ventas.dao.FacturaDAOImpl;
+import gt.guatemarket.sistema.ventas.modelo.Factura;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -30,6 +33,8 @@ public class FrmDespacho extends javax.swing.JInternalFrame {
      */
     public FrmDespacho() {
         initComponents();
+
+        cargarMensajeros();
     }
 
     /**
@@ -142,7 +147,7 @@ public class FrmDespacho extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(generarFactura)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(confirmarDespacho))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 807, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20))))
@@ -175,6 +180,18 @@ public class FrmDespacho extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cargarMensajeros() {
+        jComboBox2.removeAllItems();
+        String sql = "SELECT nombreEmpleado " + "FROM empleados " + "WHERE areaLaboral = 'Mensajero' " + "AND estadoEmpleado = 'Activo'";
+        try (Connection cn = ConexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                jComboBox2.addItem(rs.getString("nombreEmpleado"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar mensajeros:\n" + e.getMessage());
+        }
+    }
 
     private void estadoDespachoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoDespachoActionPerformed
         // TODO add your handling code here:
@@ -254,7 +271,7 @@ public class FrmDespacho extends javax.swing.JInternalFrame {
         String estado = estadoDespacho.getSelectedItem().toString();
         Despachos orden = new Despachos();
         orden.setIdVenta(venta);
-        orden.setFechaDespacho(java.time.LocalDate.now().toString());
+        orden.setFechaDespacho(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         orden.setEstadoDespacho(estado);
         DespachosDAO dao = new DespachosDAOImpl();
         boolean guardado = dao.guardar(orden);
@@ -284,58 +301,169 @@ public class FrmDespacho extends javax.swing.JInternalFrame {
 
     private void generarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarFacturaActionPerformed
         String venta = idVenta.getText().trim();
+
         if (venta.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Ingrese el ID de la venta.");
             return;
         }
-        String sql = "SELECT v.idVenta, v.nombreCliente, v.nitCliente, " + "v.telefonoCliente, v.correoCliente, v.fechaVenta, " + "d.nombreProducto, d.cantidadProducto, " + "d.precioUnitario, " + "(d.cantidadProducto * d.precioUnitario) AS total " + "FROM ventas v " + "INNER JOIN detalle_venta d " + "ON v.idVenta = d.idVenta " + "WHERE v.idVenta = ?";
-        try (Connection cn = ConexionBD.conectar(); PreparedStatement ps = cn.prepareStatement(sql)) {
+
+        String sql = "SELECT "
+                + "v.idVenta AS idVenta, "
+                + "v.nombreCliente AS nombreCliente, "
+                + "v.nitCliente AS nitCliente, "
+                + "v.telefonoCliente AS telefonoCliente, "
+                + "v.correoCliente AS correoCliente, "
+                + "v.fechaVenta AS fechaVenta, "
+                + "d.nombreProducto AS nombreProducto, "
+                + "d.cantidadProducto AS cantidadProducto, "
+                + "d.precioUnitario AS precioUnitario, "
+                + "(d.cantidadProducto * d.precioUnitario) AS total "
+                + "FROM ventas v "
+                + "INNER JOIN detalle_venta d "
+                + "ON v.idVenta = d.idVenta "
+                + "WHERE v.idVenta = ?";
+
+        try {
+            Connection cn = ConexionBD.conectar();
+            PreparedStatement ps = cn.prepareStatement(sql);
+
             ps.setString(1, venta);
+
             ResultSet rs = ps.executeQuery();
+
             boolean encontrado = false;
             double totalFactura = 0;
+
             StringBuilder factura = new StringBuilder();
+
             factura.append("========================================\n");
             factura.append("              GUATEMARKET\n");
-            factura.append("                FACTURA\n");
+            factura.append("                 FACTURA\n");
             factura.append("========================================\n");
+
             while (rs.next()) {
+
                 if (!encontrado) {
                     encontrado = true;
-                    factura.append("ID Venta: ").append(rs.getString("idVenta")).append("\n");
-                    factura.append("Cliente: ").append(rs.getString("nombreCliente")).append("\n");
-                    factura.append("NIT: ").append(rs.getString("nitCliente")).append("\n");
-                    factura.append("Telefono: ").append(rs.getString("telefonoCliente")).append("\n");
-                    factura.append("Correo: ").append(rs.getString("correoCliente")).append("\n");
-                    factura.append("Fecha: ").append(rs.getString("fechaVenta")).append("\n");
+
+                    factura.append("ID Venta: ")
+                            .append(rs.getString("idVenta"))
+                            .append("\n");
+
+                    factura.append("Cliente: ")
+                            .append(rs.getString("nombreCliente"))
+                            .append("\n");
+
+                    factura.append("NIT: ")
+                            .append(rs.getString("nitCliente"))
+                            .append("\n");
+
+                    factura.append("Telefono: ")
+                            .append(rs.getString("telefonoCliente"))
+                            .append("\n");
+
+                    factura.append("Correo: ")
+                            .append(rs.getString("correoCliente"))
+                            .append("\n");
+
+                    factura.append("Fecha: ")
+                            .append(rs.getString("fechaVenta"))
+                            .append("\n");
+
                     factura.append("----------------------------------------\n");
-                    factura.append("Producto Cant. Precio\n");
+                    factura.append("Producto       Cant.       Precio\n");
                     factura.append("----------------------------------------\n");
                 }
+
                 String producto = rs.getString("nombreProducto");
                 int cantidad = rs.getInt("cantidadProducto");
                 double precio = rs.getDouble("precioUnitario");
                 double total = rs.getDouble("total");
+
                 totalFactura += total;
-                factura.append(producto).append(" ").append(cantidad).append(" Q").append(String.format("%.2f", precio)).append("\n");
+
+                factura.append(producto)
+                        .append("       ")
+                        .append(cantidad)
+                        .append("       Q")
+                        .append(String.format("%.2f", precio))
+                        .append("\n");
             }
+
             if (!encontrado) {
                 JOptionPane.showMessageDialog(this, "No se encontró la venta.");
                 return;
             }
+
             factura.append("----------------------------------------\n");
-            factura.append("TOTAL: Q").append(String.format("%.2f", totalFactura)).append("\n");
+            factura.append("TOTAL: Q")
+                    .append(String.format("%.2f", totalFactura))
+                    .append("\n");
+
             factura.append("========================================\n");
-            factura.append(" Gracias por su compra\n");
+            factura.append("          Gracias por su compra\n");
             factura.append("========================================");
-            JTextArea areaFactura = new JTextArea(factura.toString());
+
+            // GUARDAR FACTURA
+            Factura nuevaFactura = new Factura();
+
+            nuevaFactura.setIdVenta(venta);
+
+            nuevaFactura.setFechaFactura(
+                    java.time.LocalDateTime.now().format(
+                            java.time.format.DateTimeFormatter.ofPattern(
+                                    "yyyy-MM-dd HH:mm:ss"
+                            )
+                    )
+            );
+
+            nuevaFactura.setTotal(totalFactura);
+
+            FacturaDAO dao = new FacturaDAOImpl();
+
+            if (!dao.guardar(nuevaFactura)) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "No se pudo guardar la factura."
+                );
+                return;
+            }
+
+            // MOSTRAR FACTURA
+            JTextArea areaFactura = new JTextArea(
+                    factura.toString()
+            );
+
             areaFactura.setEditable(false);
-            areaFactura.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 14));
+
+            areaFactura.setFont(
+                    new java.awt.Font(
+                            "Monospaced",
+                            java.awt.Font.PLAIN,
+                            14
+                    )
+            );
+
             JScrollPane scroll = new JScrollPane(areaFactura);
-            scroll.setPreferredSize(new java.awt.Dimension(600, 450));
-            JOptionPane.showMessageDialog(this, scroll, "Factura", JOptionPane.INFORMATION_MESSAGE);
+
+            scroll.setPreferredSize(
+                    new java.awt.Dimension(600, 450)
+            );
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    scroll,
+                    "Factura",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error al generar la factura:\n" + e.getMessage());
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Error al generar la factura:\n"
+                    + e.getMessage()
+            );
         }
     }//GEN-LAST:event_generarFacturaActionPerformed
 

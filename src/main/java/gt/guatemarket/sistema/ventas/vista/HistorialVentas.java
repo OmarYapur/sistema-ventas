@@ -27,6 +27,7 @@ public class HistorialVentas extends javax.swing.JInternalFrame {
      */
     public HistorialVentas() {
         initComponents();
+        setTitle("Reporte Ventas");
         cargarVentas();
     }
 

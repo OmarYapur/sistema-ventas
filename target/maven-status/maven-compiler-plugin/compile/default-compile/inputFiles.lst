@@ -7,6 +7,8 @@ C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\CategoriaDAOImpl.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\ClienteDAO.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\ClienteDAOImpl.java
+C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\ConsultaDespachoDAO.java
+C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\ConsultaDespachoDAOImpl.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\ConsultaVentaDAO.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\ConsultaVentaDAOImpl.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\DespachosDAO.java
@@ -15,6 +17,8 @@ C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\DetalleVentaDAOImpl.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\EmpleadoDAO.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\EmpleadoDAOImpl.java
+C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\FacturaDAO.java
+C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\FacturaDAOImpl.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\OrdenDespachoDAO.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\OrdenDespachoDAOImpl.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\ProductoDAO.java
@@ -23,6 +27,7 @@ C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\dao\VentaDAOImpl.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\Categoria.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\Cliente.java
+C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\ConsultaDespacho.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\ConsultaVenta.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\Despachos.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\DetalleConsultaVenta.java
@@ -35,11 +40,15 @@ C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\Persona.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\Producto.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\modelo\Venta.java
+C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\DetalleFactura.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\FrmCategorias.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\FrmClientes.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\FrmDespacho.java
+C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\FrmEmpleados.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\FrmEntregas.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\FrmPrincipal.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\FrmProductos.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\FrmVentas.java
+C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\HistorialDespachos.java
+C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\HistorialFacturas.java
 C:\Users\omary\OneDrive\Documents\NetBeansProjects\sistema-ventas\src\main\java\gt\guatemarket\sistema\ventas\vista\HistorialVentas.java

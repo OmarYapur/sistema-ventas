@@ -16,6 +16,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
      * Creates new form FrmPrincipal
      */
     public FrmPrincipal() {
+        setTitle("GuateMarket");
         initComponents();
     }
 
@@ -85,6 +86,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu8.add(jMenuItem17);
 
         jMenuItem3.setText("Empleados");
+        jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
         jMenu8.add(jMenuItem3);
 
         jMenuBar2.add(jMenu8);
@@ -96,6 +98,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu6.add(jMenuItem13);
 
         jMenuItem14.setText("Historial Despachos");
+        jMenuItem14.addActionListener(this::jMenuItem14ActionPerformed);
         jMenu6.add(jMenuItem14);
 
         jMenuBar2.add(jMenu6);
@@ -103,6 +106,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu1.setText("Facturación");
 
         jMenuItem15.setText("Facturas Emitidas");
+        jMenuItem15.addActionListener(this::jMenuItem15ActionPerformed);
         jMenu1.add(jMenuItem15);
 
         jMenuBar2.add(jMenu1);
@@ -196,6 +200,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jDesktopPane1.add(ventana);
         ventana.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        FrmEmpleados ventana = new FrmEmpleados();
+        jDesktopPane1.add(ventana);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        HistorialDespachos ventana = new HistorialDespachos();
+        jDesktopPane1.add(ventana);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        HistorialFacturas ventana = new HistorialFacturas();
+        jDesktopPane1.add(ventana);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     /**
      * @param args the command line arguments
