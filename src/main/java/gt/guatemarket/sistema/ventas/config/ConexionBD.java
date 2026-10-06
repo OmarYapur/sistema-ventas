@@ -15,11 +15,11 @@ import java.sql.SQLException;
 public class ConexionBD {
 
     private static final String URL
-            = "jdbc:mysql://localhost:3306/sistema-ventas";
+            = "jdbc:mysql://192.168.1.19:3306/sistema-ventas";
 
-    private static final String USUARIO = "root";
-    private static final String PASSWORD = "omar0408";
-
+    private static final String USUARIO = "sistema";
+    private static final String PASSWORD = "proyprogra";
+ 
     public static Connection conectar() throws SQLException {
         return DriverManager.getConnection(
                 URL,
